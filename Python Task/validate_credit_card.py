@@ -1,25 +1,23 @@
-# importing module
+
 import re
 
 def validate_credit_card(n,card_number):
     for i in range(n):
+        #removing - from the card_number
         credit = card_number[i].replace('-','')
 
-        # valid is true in the beggining
-        valid = True
-
-        print(credit)
-        # using regual expressions
+        flag = True
+        # writing regex to check if the flag is true or not
         length_16 = bool(re.match(r'^[4-6]\d{15}$',credit))
         consecutive = bool(re.findall(r'(?=(\d)\1\1\1)',credit))
 
-        # checking if the above regural expressions are true
+        # updating flag 
         if length_16 == True :
             if consecutive == True:
-                valid=False
+                flag=False
         else:
-            valid = False       
-        if valid == True:
+            flag = False       
+        if flag == True:
             print( 'Valid')
         else:
             print('Invalid')
