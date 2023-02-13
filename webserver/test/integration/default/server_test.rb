@@ -28,6 +28,22 @@ describe 'my_cookbook::server' do
   it 'redirects HTTP requests to HTTPS' do
     expect(chef_run).to write_log('Redirecting HTTP to HTTPS.').with_message(/Redirecting from http to https/)
   end
+
+  it 'creates the HTML file' do
+    expect(chef_run).to render_file('/var/www/html/index.html').with_content(/<h1>Hello World!<\/h1>/)
+  end
+
+  it 'configures SSL' do
+    expect(chef_run).to render_file('/etc/httpd/conf.d/ssl.erb').with_content(/SSLEngine on/)
+  end
+
+  it 'secures the application' do
+    expect(chef_run).to render_file('/etc/httpd/conf/httpd.erb').with_content(/Listen 443/)
+  end
+
+  it 'generates a self-signed certificate' do
+    expect(chef_run).to run_execute('generate self-signed certificate')
+  end
   
 end
 
