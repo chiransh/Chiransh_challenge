@@ -13,8 +13,12 @@ describe 'my_cookbook::server' do
     expect(chef_run).to install_package('httpd')
   end
 
-  it 'enables the openssl service' do
-    expect(chef_run).to enable_service('openssl')
+  it 'installs the openssl package' do
+    expect(chef_run).to install_package('openssl')
+  end
+
+  it 'enables the httpd service' do
+    expect(chef_run).to enable_service('httpd')
   end
 
   it 'starts the httpd service' do
@@ -24,7 +28,6 @@ describe 'my_cookbook::server' do
   it 'redirects HTTP requests to HTTPS' do
     expect(chef_run).to write_log('Redirecting HTTP to HTTPS.').with_message(/Redirecting from http to https/)
   end
-
   
 end
 
