@@ -1,0 +1,6 @@
+<VirtualHost *:443>
+  ServerName <%= node['hostname'] %>
+  SSLEngine on
+  SSLCertificateFile /etc/ssl/crts/web-server.crt
+  SSLCertificateKeyFile /etc/ssl/private/web-server.key
+</VirtualHost>

@@ -1,0 +1,5 @@
+Listen 80
+<VirtualHost *:80>
+  ServerName <%= node['hostname'] %>
+  Redirect permanent / https://<%= node['hostname'] %>/
+</VirtualHost>
